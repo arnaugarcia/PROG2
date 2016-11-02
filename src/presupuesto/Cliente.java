@@ -8,14 +8,14 @@ public class Cliente {
     private String apellidos;
     private int telefono;
     private boolean vip;
-    private ListaPrepuestos lista;
+    private ListaPresupuestos lista;
 
     public Cliente(String nombre, String apellidos, int telefono, boolean vip) {
         this.nombre = nombre;
         this.apellidos = apellidos;
         this.telefono = telefono;
         this.vip = vip;
-        this.lista = new ListaPrepuestos();
+        this.lista = new ListaPresupuestos();
     }
 
     public Cliente() {
@@ -54,5 +54,9 @@ public class Cliente {
         this.vip = vip;
     }
 
+    public void setLista(ListaPresupuestos lista) {
+        this.lista = lista;
+    }
 
+    public ListaPresupuestos getListaPresupuestos() { return lista; }
 }

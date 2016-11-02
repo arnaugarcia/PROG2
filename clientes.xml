@@ -5,29 +5,16 @@
    <void method="add">
     <object class="presupuesto.Cliente">
      <void property="apellidos">
-      <string>Pepe</string>
+      <string>Garcia</string>
      </void>
      <void property="nombre">
-      <string>Juan</string>
+      <string>Arnau</string>
      </void>
      <void property="telefono">
-      <int>234</int>
+      <int>692464645</int>
      </void>
      <void property="vip">
       <boolean>true</boolean>
-     </void>
-    </object>
-   </void>
-   <void method="add">
-    <object class="presupuesto.Cliente">
-     <void property="apellidos">
-      <string>Comes</string>
-     </void>
-     <void property="nombre">
-      <string>Albert</string>
-     </void>
-     <void property="telefono">
-      <int>660223512</int>
      </void>
     </object>
    </void>

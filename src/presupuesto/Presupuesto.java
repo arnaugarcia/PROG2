@@ -6,10 +6,17 @@ import java.io.Serializable;
  * Created by Arnau on 18/10/16.
  */
 public class Presupuesto implements Serializable {
+
     private int id;
     private String concepto;
     private double precio;
     private String estado;
+
+
+
+    public Presupuesto(){
+
+    }
 
     public Presupuesto(int id, String concepto, double precio, String estado) {
         this.id = id;
@@ -18,9 +25,6 @@ public class Presupuesto implements Serializable {
         this.estado = estado;
     }
 
-    public Presupuesto(){
-
-    }
 
     public int getId() {
         return id;
@@ -53,4 +57,5 @@ public class Presupuesto implements Serializable {
     public void setEstado(String estado) {
         this.estado = estado;
     }
+
 }
