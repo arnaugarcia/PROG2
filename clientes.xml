@@ -5,16 +5,13 @@
    <void method="add">
     <object class="presupuesto.Cliente">
      <void property="apellidos">
-      <string>Garcia</string>
+      <string>a</string>
      </void>
      <void property="nombre">
-      <string>Arnau</string>
+      <string>maaa</string>
      </void>
      <void property="telefono">
-      <int>692464645</int>
-     </void>
-     <void property="vip">
-      <boolean>true</boolean>
+      <int>1</int>
      </void>
     </object>
    </void>
