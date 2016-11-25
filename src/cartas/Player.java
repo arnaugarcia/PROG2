@@ -48,4 +48,8 @@ public class Player {
     public void setCard(ArrayList card) {
         Card = card;
     }
+
+    public void addCardToPlayer(Card card){Card.add(card);}
+
+    public boolean hasCard(Card card){ return Card.contains(card);}
 }
