@@ -9,7 +9,8 @@ public class Player {
     private String username;
     private String password;
     private int trophies;
-    private ArrayList Card;
+    private ArrayList cards;
+
 
     public Player(String username, String password, int trophies) {
         this.username = username;
@@ -41,15 +42,13 @@ public class Player {
         this.trophies = trophies;
     }
 
-    public ArrayList getCard() {
-        return Card;
-    }
+    public ArrayList getCard() {return cards; }
 
     public void setCard(ArrayList card) {
-        Card = card;
+        cards = card;
     }
 
-    public void addCardToPlayer(Card card){Card.add(card);}
+    public void addCardToPlayer(Card card){ cards.add(card);}
 
-    public boolean hasCard(Card card){ return Card.contains(card);}
+    public boolean hasCard(Card card){return cards.contains(card);}
 }

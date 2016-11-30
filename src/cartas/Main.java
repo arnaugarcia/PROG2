@@ -1,5 +1,6 @@
 package cartas;
 
+import stucom.tools.Colors;
 import stucom.tools.InputData;
 
 import java.util.ArrayList;
@@ -16,12 +17,15 @@ public class Main {
         createCardsAndPlayers();
         int option = 0;
         do{
-            System.out.println("**** STUCOM ROYAL ****");
+            System.out.println(Colors.ANSI_BLUE + "**** " + Colors.ANSI_YELLOW + " STUCOM ROYAL " + Colors.ANSI_BLUE + " ****" + Colors.ANSI_RESET);
             showMenu();
             option = InputData.pedirEntero("Introduce una opción");
             switch (option){
                 case 1:
-                    getCards();
+                    option1();
+                    break;
+                case 2:
+                    option2();
                     break;
             }
         }while(option != 4);
@@ -77,29 +81,44 @@ public class Main {
         System.out.println("3. Ranking");
         System.out.println("4. Salir");
     }
-    public static void getCards(){
+    public static void option1(){
+        ArrayList<Card> cardsToAdd = new ArrayList<>();
         Player player = loggin(InputData.pedirCadena("Introduce nombre de usuario"),InputData.pedirCadena("Introduce contraseña"));
+        showAllCards();
         if (player != null){
-            System.out.println("The has loggeado correctamente");
-            showAllCards();
-            String nombreCarta = InputData.pedirCadena("Introduce el nombre de una carta para añadirla al inventario");
-            for (Card c : cards) {
-                if (c.getName().equalsIgnoreCase(nombreCarta)){
-                    if (!player.hasCard(c)){
-                        player.addCardToPlayer(c);
+            do {
+                String nombreCarta = InputData.pedirCadena("Introduce el nombre de una carta para añadirla al inventario" + Colors.ANSI_RESET);
+                boolean exists = false;
+                for (Card c : cards) {
+                    if (c.getName().equalsIgnoreCase(nombreCarta) && !cardsToAdd.contains(c)){
+                        cardsToAdd.add(c);
+                        exists = true;
+                        System.out.println(Colors.ANSI_GREEN + "La carta se ha añadido al inventario" + Colors.ANSI_RESET);
                     }
                 }
-            }
-        }else{
-            System.out.println("Loggin fallido");
+                if (!exists){
+                    System.out.println(Colors.ANSI_RED + "La carta no se encuentra o ya la tienes en tu inventario" + Colors.ANSI_RESET);
+                }
+            } while(cardsToAdd.size() != 5);
+            player.setCard(cardsToAdd);
+            System.out.println(Colors.ANSI_GREEN + "Las Cartas se añadieron al inventario del jugador " + player.getUsername() + Colors.ANSI_RESET);
+        }
+    }
+    public static void option2(){
+        Player player1 = loggin(InputData.pedirCadena("Introduce nombre de usuario"),InputData.pedirCadena("Introduce contraseña"));
+        Player player2 = loggin(InputData.pedirCadena("Introduce nombre de usuario"),InputData.pedirCadena("Introduce contraseña"));
+        if (player1 != null && player2 != null){
+
         }
     }
     public static Player loggin(String username, String password){
         for (Player p : players) {
             if (p.getUsername().equalsIgnoreCase(username) && p.getPassword().equalsIgnoreCase(password)){
+                System.out.println(Colors.ANSI_GREEN + "Te has logeado correctamente " + p.getUsername() + Colors.ANSI_RESET);
                 return p;
             }
         }
+        System.out.println(Colors.ANSI_RED + "Loggin fallido" + Colors.ANSI_RESET);
         return null;
     }
     public static void showInfoCardTrope(CardTrope cardTrope){
