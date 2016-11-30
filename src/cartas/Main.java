@@ -107,7 +107,52 @@ public class Main {
     public static void option2(){
         Player player1 = loggin(InputData.pedirCadena("Introduce nombre de usuario"),InputData.pedirCadena("Introduce contraseña"));
         Player player2 = loggin(InputData.pedirCadena("Introduce nombre de usuario"),InputData.pedirCadena("Introduce contraseña"));
+        ArrayList<Card> cardsPlayer1 = new ArrayList<>(3);
+        ArrayList<Card> cardsPlayer2 = new ArrayList<>(3);
+        int elixirPlayer1 = 0;
+        int elixirPlayer2 = 0;
+        //TODO : Añadir un metodo para insertar carta al jugador (addCardToPlayer) de este estilo
         if (player1 != null && player2 != null){
+            String playerStart = InputData.pedirCadena("Introduce el jugador que empieza" + "(" + player1.getUsername() + " o " + player2.getUsername() + ")");
+            showCardsPlayer(player1);
+            System.out.println("Seleciona 3 de tu inventario " + player1.getUsername());
+            do {
+                String nombreCarta = InputData.pedirCadena("Introduce el nombre de una carta para utilizar la en la batalla "+ player1.getUsername() + Colors.ANSI_RESET);
+                boolean exists = false;
+                for (Card c : cards) {
+                    if (c.getName().equalsIgnoreCase(nombreCarta) && !cardsPlayer1.contains(c)){
+                        cardsPlayer1.add(c);
+                        exists = true;
+                        elixirPlayer1 = elixirPlayer1 + c.getElixir();
+                        System.out.println(Colors.ANSI_GREEN + "La carta " + c.getName() + " se ha añadido al inventario" + Colors.ANSI_RESET);
+                    }
+                }
+                if (!exists){
+                    System.out.println(Colors.ANSI_RED + "La carta no se encuentra o ya la tienes en tu inventario" + Colors.ANSI_RESET);
+                }
+            } while(cardsPlayer1.size() != 3);
+            showCardsPlayer(player2);
+            do {
+                String nombreCarta = InputData.pedirCadena("Introduce el nombre de una carta para utiliar la en la batalla" + player2.getUsername()  + Colors.ANSI_RESET);
+                boolean exists = false;
+                for (Card c : cards) {
+                    if (c.getName().equalsIgnoreCase(nombreCarta) && !cardsPlayer2.contains(c)){
+                        cardsPlayer2.add(c);
+                        exists = true;
+                        elixirPlayer2 = elixirPlayer2 + c.getElixir();
+                        System.out.println(Colors.ANSI_GREEN + "La carta " + c.getName() + " se ha añadido al inventario" + Colors.ANSI_RESET);
+                    }
+                }
+                if (!exists){
+                    System.out.println(Colors.ANSI_RED + "La carta no se encuentra o ya la tienes en tu inventario" + Colors.ANSI_RESET);
+                }
+            } while(cardsPlayer2.size() != 3);
+
+            if (!(elixirPlayer1 > 10) && !(elixirPlayer2 > 10)){
+                battle(cardsPlayer1,cardsPlayer2);
+            }else{
+                System.out.println(Colors.ANSI_RED + "La suma de los elixires es superior a 10" + Colors.ANSI_RESET);
+            }
 
         }
     }
@@ -125,22 +170,45 @@ public class Main {
         System.out.println("La carta: " + cardTrope.getName() + " tiene " + cardTrope.getHealth() + " puntos de vida, " + cardTrope.getElixir() + " elixires y " + cardTrope.getAttack() + " puntos de ataque ");
     }
     public static void showInfoCardSpell(CardSpell cardSpell){
-        System.out.println("La carta: " + cardSpell.getName() + " tiene " + cardSpell.getHealth() + " puntos de vida, " + cardSpell.getElixir() + " elixires, esta en modo " + cardSpell.getMode() +  "y tiene un alcance de " + cardSpell.getRange());
+        System.out.println("La carta: " + cardSpell.getName() + " tiene " + cardSpell.getHealth() + " puntos de vida, " + cardSpell.getElixir() + " elixires, esta en modo " + cardSpell.getMode() +  " y tiene un alcance de " + cardSpell.getRange());
     }
     public static void showInfoCardStructure(CardStructure cardStructure){
         System.out.println("La carta: " + cardStructure.getName() + " tiene " + cardStructure.getHealth() + " puntos de vida, " + cardStructure.getElixir() + " elixires y " + cardStructure.getDefend() + " puntos de defensa ");
     }
     public static void showAllCards(){
         for (Card card : cards){
-            if (card instanceof CardTrope) {
-                CardTrope tropeCard = (CardTrope) card;
-                showInfoCardTrope(tropeCard);
-            } else if (card instanceof CardStructure){
-                CardStructure structureCard  = (CardStructure) card;
-                showInfoCardStructure(structureCard);
-            } else if (card instanceof CardSpell){
-                CardSpell cardSpell = (CardSpell) card;
-                showInfoCardSpell(cardSpell);
+            showCard(card);
+        }
+    }
+    public static void showCard(Card card){
+        if (card instanceof CardTrope) {
+            CardTrope tropeCard = (CardTrope) card;
+            showInfoCardTrope(tropeCard);
+        } else if (card instanceof CardStructure){
+            CardStructure structureCard  = (CardStructure) card;
+            showInfoCardStructure(structureCard);
+        } else if (card instanceof CardSpell){
+            CardSpell cardSpell = (CardSpell) card;
+            showInfoCardSpell(cardSpell);
+        }
+    }
+    public static void showCardsPlayer(Player player){
+        ArrayList<Card> cards = player.getCard();
+        if (cards != null){
+            for (Card card : cards){
+                showCard(card);
+            }
+        }else{
+            System.out.println(Colors.ANSI_RED + "El jugador " + player.getUsername() + " no tine cartas asignadas" + Colors.ANSI_RESET);
+        }
+    }
+    public static void battle(ArrayList<Card> cardsPlayer1, ArrayList<Card> cardsPlayer2){
+        int healthPlayer1, healthPlayer2 = 0;
+        for (int i = 0; i < 5; i++){
+            Card cardPlayer1 = cardsPlayer1.get(i);
+            Card cardPlayer2 = cardsPlayer2.get(i);
+            if (cardPlayer1 instanceof CardTrope && cardPlayer2 instanceof CardTrope){
+                
             }
         }
     }
