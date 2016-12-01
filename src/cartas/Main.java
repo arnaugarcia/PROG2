@@ -2,6 +2,7 @@ package cartas;
 
 import stucom.tools.Colors;
 import stucom.tools.InputData;
+import stucom.tools.Show;
 
 import java.util.ArrayList;
 
@@ -84,8 +85,8 @@ public class Main {
     public static void option1(){
         ArrayList<Card> cardsToAdd = new ArrayList<>();
         Player player = loggin(InputData.pedirCadena("Introduce nombre de usuario"),InputData.pedirCadena("Introduce contraseña"));
-        showAllCards();
         if (player != null){
+            showAllCards();
             do {
                 String nombreCarta = InputData.pedirCadena("Introduce el nombre de una carta para añadirla al inventario" + Colors.ANSI_RESET);
                 boolean exists = false;
@@ -133,7 +134,7 @@ public class Main {
             } while(cardsPlayer1.size() != 3);
             showCardsPlayer(player2);
             do {
-                String nombreCarta = InputData.pedirCadena("Introduce el nombre de una carta para utiliar la en la batalla" + player2.getUsername()  + Colors.ANSI_RESET);
+                String nombreCarta = InputData.pedirCadena("Introduce el nombre de una carta para utilizar la en la batalla" + player2.getUsername()  + Colors.ANSI_RESET);
                 boolean exists = false;
                 for (Card c : cards) {
                     if (c.getName().equalsIgnoreCase(nombreCarta) && !cardsPlayer2.contains(c)){
@@ -149,7 +150,7 @@ public class Main {
             } while(cardsPlayer2.size() != 3);
 
             if (!(elixirPlayer1 > 10) && !(elixirPlayer2 > 10)){
-                battle(cardsPlayer1,cardsPlayer2);
+                battle(player1, cardsPlayer1, player2, cardsPlayer2);
             }else{
                 System.out.println(Colors.ANSI_RED + "La suma de los elixires es superior a 10" + Colors.ANSI_RESET);
             }
@@ -159,11 +160,11 @@ public class Main {
     public static Player loggin(String username, String password){
         for (Player p : players) {
             if (p.getUsername().equalsIgnoreCase(username) && p.getPassword().equalsIgnoreCase(password)){
-                System.out.println(Colors.ANSI_GREEN + "Te has logeado correctamente " + p.getUsername() + Colors.ANSI_RESET);
+                Show.success("Te has logeado correctamente " + p.getUsername());
                 return p;
             }
         }
-        System.out.println(Colors.ANSI_RED + "Loggin fallido" + Colors.ANSI_RESET);
+        Show.error("Loggin fallido");
         return null;
     }
     public static void showInfoCardTrope(CardTrope cardTrope){
@@ -202,13 +203,17 @@ public class Main {
             System.out.println(Colors.ANSI_RED + "El jugador " + player.getUsername() + " no tine cartas asignadas" + Colors.ANSI_RESET);
         }
     }
-    public static void battle(ArrayList<Card> cardsPlayer1, ArrayList<Card> cardsPlayer2){
+    public static void battle(Player player1, ArrayList<Card> cardsPlayer1, Player player2, ArrayList<Card> cardsPlayer2){
         int healthPlayer1, healthPlayer2 = 0;
         for (int i = 0; i < 5; i++){
             Card cardPlayer1 = cardsPlayer1.get(i);
             Card cardPlayer2 = cardsPlayer2.get(i);
-            if (cardPlayer1 instanceof CardTrope && cardPlayer2 instanceof CardTrope){
-                
+            if (cardPlayer1 instanceof CardTrope){
+                /**
+
+             */
+                cardPlayer2.setHealth(cardPlayer2.getHealth() - ((CardTrope) cardPlayer1).getAttack());
+                healthPlayer2 += cardPlayer2.getHealth();
             }
         }
     }
