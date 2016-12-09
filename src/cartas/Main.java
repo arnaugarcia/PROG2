@@ -78,8 +78,6 @@ public class Main {
 
         Player marti = new Player("Mulusaso","123456789", 0);
         players.add(marti);
-        arnau.setTrophies(30);
-        albert.setTrophies(10);
 
     }
     private static void showMenu(){
