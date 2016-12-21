@@ -5,7 +5,6 @@ package restaurantbbdd;
 
 import model.Cocinero;
 import persistence.RestaurantJDBC;
-
 import java.sql.SQLException;
 
 /**

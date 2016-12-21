@@ -38,7 +38,7 @@ public class RestaurantJDBC {
     public void conectar() throws SQLException {
         String url = "jdbc:mysql://localhost:3306/restaurant";
         String usr = "root";
-        String pass = "5933059330";
+        String pass = "root";
         conexion = DriverManager.getConnection(url, usr, pass);
     }
 
