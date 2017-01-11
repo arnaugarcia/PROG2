@@ -16,7 +16,7 @@ public class Plato {
     private Cocinero cocinero;
 
     public Plato() {
-
+        
     }
 
     public Plato(String nombre, String tipo, double precio, Cocinero cocinero) {
