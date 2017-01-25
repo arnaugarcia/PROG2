@@ -1,10 +1,18 @@
 package model;
 
+import java.time.LocalDate;
+
 /**
  * Created by Arnau on 25/01/17.
  */
 public class EstadisticaDTO {
 
+    private String name;
+    private LocalDate bornDate;
+    private int baskets;
+    private int assists;
+    private int reboots;
+    private Team team;
     private double avgbaskets;
     private double avgassists;
     private double avgrebounds;
@@ -27,6 +35,66 @@ public class EstadisticaDTO {
         this.minassists = minassists;
         this.minrebounds = minrebounds;
         this.position = position;
+    }
+
+    public EstadisticaDTO(String name, int baskets, int assists, int reboots) {
+        this.name = name;
+        this.baskets = baskets;
+        this.assists = assists;
+        this.reboots = reboots;
+    }
+
+    public EstadisticaDTO(String name, int baskets) {
+        this.name = name;
+        this.baskets = baskets;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public LocalDate getBornDate() {
+        return bornDate;
+    }
+
+    public void setBornDate(LocalDate bornDate) {
+        this.bornDate = bornDate;
+    }
+
+    public int getBaskets() {
+        return baskets;
+    }
+
+    public void setBaskets(int baskets) {
+        this.baskets = baskets;
+    }
+
+    public int getAssists() {
+        return assists;
+    }
+
+    public void setAssists(int assists) {
+        this.assists = assists;
+    }
+
+    public int getReboots() {
+        return reboots;
+    }
+
+    public void setReboots(int reboots) {
+        this.reboots = reboots;
+    }
+
+    public Team getTeam() {
+        return team;
+    }
+
+    public void setTeam(Team team) {
+        this.team = team;
     }
 
     public double getAvgbaskets() {
@@ -109,4 +177,19 @@ public class EstadisticaDTO {
         this.position = position;
     }
 
+    @Override
+    public String toString() {
+        return "EstadisticaDTO{" +
+                "avgbaskets=" + avgbaskets +
+                ", avgassists=" + avgassists +
+                ", avgrebounds=" + avgrebounds +
+                ", maxbaskets=" + maxbaskets +
+                ", maxassists=" + maxassists +
+                ", maxrebounds=" + maxrebounds +
+                ", minbaskets=" + minbaskets +
+                ", minassists=" + minassists +
+                ", minrebounds=" + minrebounds +
+                ", position='" + position + '\'' +
+                '}';
+    }
 }

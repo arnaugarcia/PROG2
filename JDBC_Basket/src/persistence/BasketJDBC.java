@@ -212,7 +212,7 @@ public class BasketJDBC {
     }
 
     public List<EstadisticaDTO> selectAllPlayersAvgAndMaxMin() throws SQLException {
-        String query = "select avg(nbaskets) as avgbaskets, avg(nassists) as avgassists, avg(nrebounds) as avgrebounds, max(nbaskets) as maxbaskets, max(nassists) as maxassists, max(nrebounds) as maxrebounds, min(nbaskets) as minbaskets, min(nassists) as minassists, min(nrebounds) as minrebounds from player group by position";
+        String query = "select position, avg(nbaskets) as avgbaskets, avg(nassists) as avgassists, avg(nrebounds) as avgrebounds, max(nbaskets) as maxbaskets, max(nassists) as maxassists, max(nrebounds) as maxrebounds, min(nbaskets) as minbaskets, min(nassists) as minassists, min(nrebounds) as minrebounds from player group by position";
         PreparedStatement preparedStatement = conexion.prepareStatement(query);
         ResultSet resultset = preparedStatement.executeQuery(query);
         List<EstadisticaDTO> estadisticaDTOList = new ArrayList<>();
@@ -225,6 +225,19 @@ public class BasketJDBC {
         return estadisticaDTOList;
     }
 
+    public List<EstadisticaDTO> rankingPlayersByBaskets() throws SQLException{
+        String query = "select name, nbaskets from player order by nbaskets DESC";
+        PreparedStatement preparedStatement = conexion.prepareStatement(query);
+        ResultSet resultSet = preparedStatement.executeQuery(query);
+        List<EstadisticaDTO> estadisticaDTOList = new ArrayList<>();
+        while (resultSet.next()){
+            EstadisticaDTO estadisticaDTO = new EstadisticaDTO(resultSet.getString("name"),resultSet.getInt("nbaskets"));
+            estadisticaDTOList.add(estadisticaDTO);
+        }
+        resultSet.close();
+        preparedStatement.close();
+        return estadisticaDTOList;
+    }
     public void reset() throws SQLException{
         PreparedStatement resetTeam = conexion.prepareStatement("DELETE FROM team");
         PreparedStatement resetPlayer = conexion.prepareStatement("DELETE FROM player");

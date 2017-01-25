@@ -3,6 +3,7 @@
  */
 package basketbbdd;
 
+import model.EstadisticaDTO;
 import model.Player;
 import model.Team;
 import persistence.BasketJDBC;
@@ -90,8 +91,23 @@ public class BasketBBDD {
 
             //Ejercicio 12
             System.out.println("Agrupar los jugadores por la posición del campo y devolver para cada grupo la siguiente información: la media, el máximo y el mínimo de canastas, asistencias y rebotes.");
+            for (EstadisticaDTO estadisticaDTO : conexion.selectAllPlayersAvgAndMaxMin()){
+                Show.success(estadisticaDTO.toString());
+            }
 
+            //Ejercicio 13
+            System.out.println("Ranking de jugadores por número de canastas");
+            for (int i = 0, x = 0; i<conexion.rankingPlayersByBaskets().size(); i++, x++){
+                Show.success(x+1 + " " +  conexion.rankingPlayersByBaskets().get(i).getName() + " " + conexion.rankingPlayersByBaskets().get(i).getBaskets());
+            }
 
+            //Ejercicio 14
+            System.out.println("Obtener la posición dentro del ranking para un jugador determinado (2)");
+            Show.success("Posición 2 " + conexion.rankingPlayersByBaskets().get(2).getName() + " " + conexion.rankingPlayersByBaskets().get(2).getBaskets());
+
+            //Ejercicio 15
+            System.out.println("Listado de equipos existentes en una localidad determinada");
+            Show.success("// TODO: Acabar consulta");
 
         } catch (SQLException ex) {
             Show.error("Error con la BBDD: " + ex.getMessage());
