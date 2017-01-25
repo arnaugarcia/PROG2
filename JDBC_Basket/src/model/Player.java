@@ -25,6 +25,9 @@ public class Player {
         this.team = team;
     }
 
+    public Player() {
+    }
+
     public String getNombre() {
         return nombre;
     }
@@ -79,5 +82,18 @@ public class Player {
 
     public void setTeam(Team team) {
         this.team = team;
+    }
+
+    @Override
+    public String toString() {
+        return "Player{" +
+                "nombre='" + nombre + '\'' +
+                ", bornDate=" + bornDate +
+                ", numberBaskets=" + numberBaskets +
+                ", numberAssists=" + numberAssists +
+                ", numberReboots=" + numberReboots +
+                ", posicion='" + posicion + '\'' +
+                ", team=" + team +
+                '}';
     }
 }

@@ -18,6 +18,9 @@ public class Team {
         this.creationDate = creationDate;
     }
 
+    public Team() {
+    }
+
     public String getName() {
         return name;
     }
@@ -40,5 +43,14 @@ public class Team {
 
     public void setCreationDate(LocalDate creationDate) {
         this.creationDate = creationDate;
+    }
+
+    @Override
+    public String toString() {
+        return "Team{" +
+                "name='" + name + '\'' +
+                ", location='" + location + '\'' +
+                ", creationDate=" + creationDate +
+                '}';
     }
 }
