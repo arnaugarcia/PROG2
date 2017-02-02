@@ -86,14 +86,12 @@ public class Player {
 
     @Override
     public String toString() {
-        return "Player{" +
-                "nombre='" + nombre + '\'' +
-                ", bornDate=" + bornDate +
-                ", numberBaskets=" + numberBaskets +
-                ", numberAssists=" + numberAssists +
-                ", numberReboots=" + numberReboots +
-                ", posicion='" + posicion + '\'' +
-                ", team=" + team +
-                '}';
+        return  "Jugador (Nombre: " + nombre +
+                ", Fecha de nacimiento: " + bornDate +
+                ", Basquets: " + numberBaskets +
+                ", Assitencias: " + numberAssists +
+                ", Rebotes: " + numberReboots +
+                ", Posicion: " + posicion  +
+                ", Equipo: " + team + ")";
     }
 }

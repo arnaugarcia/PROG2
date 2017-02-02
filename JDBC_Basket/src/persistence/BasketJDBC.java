@@ -238,6 +238,93 @@ public class BasketJDBC {
         preparedStatement.close();
         return estadisticaDTOList;
     }
+
+    public List<Player> getPlayersByPosition(String position) throws SQLException{
+        String query = "SELECT * FROM player WHERE position = '" + position + "'";
+        PreparedStatement preparedStatement = conexion.prepareStatement(query);
+        ResultSet resultSet = preparedStatement.executeQuery(query);
+        List<Player> playerList = new ArrayList<>();
+        while (resultSet.next()){
+            Player player = new Player();
+            player.setNombre(resultSet.getString("name"));
+            player.setBornDate(resultSet.getDate("birth").toLocalDate());
+            player.setNumberBaskets(resultSet.getInt("nbaskets"));
+            player.setNumberAssists(resultSet.getInt("nassists"));
+            player.setNumberReboots(resultSet.getInt("nrebounds"));
+            player.setPosicion(resultSet.getString("position"));
+            player.setTeam(selectTeamByName(resultSet.getString("team")));
+            playerList.add(player);
+        }
+        resultSet.close();
+        preparedStatement.close();
+        return playerList;
+
+    }
+
+    public List<Player> getPlayersFromTeamName(String name) throws SQLException{
+        String query = "select * from player where team = '" + name + "'";
+        PreparedStatement preparedStatement = conexion.prepareStatement(query);
+        ResultSet resultSet = preparedStatement.executeQuery(query);
+        List<Player> playerList = new ArrayList<>();
+        while (resultSet.next()){
+            Player player = new Player();
+            player.setNombre(resultSet.getString("name"));
+            player.setBornDate(resultSet.getDate("birth").toLocalDate());
+            player.setNumberBaskets(resultSet.getInt("nbaskets"));
+            player.setNumberAssists(resultSet.getInt("nassists"));
+            player.setNumberReboots(resultSet.getInt("nrebounds"));
+            player.setPosicion(resultSet.getString("position"));
+            player.setTeam(selectTeamByName(resultSet.getString("team")));
+            playerList.add(player);
+        }
+        resultSet.close();
+        preparedStatement.close();
+        return playerList;
+
+    }
+    public List<Player> getPlayersFromTeamNameAndPosition(String name, String position) throws SQLException{
+        String query = "select * from player where team = '" + name + "' && position = '" + position + "'";
+        PreparedStatement preparedStatement = conexion.prepareStatement(query);
+        ResultSet resultSet = preparedStatement.executeQuery(query);
+        List<Player> playerList = new ArrayList<>();
+        while (resultSet.next()){
+            Player player = new Player();
+            player.setNombre(resultSet.getString("name"));
+            player.setBornDate(resultSet.getDate("birth").toLocalDate());
+            player.setNumberBaskets(resultSet.getInt("nbaskets"));
+            player.setNumberAssists(resultSet.getInt("nassists"));
+            player.setNumberReboots(resultSet.getInt("nrebounds"));
+            player.setPosicion(resultSet.getString("position"));
+            player.setTeam(selectTeamByName(resultSet.getString("team")));
+            playerList.add(player);
+        }
+        resultSet.close();
+        preparedStatement.close();
+        return playerList;
+
+    }
+
+    public List<Player> getPlayersBasketsFromTeamName(String name) throws SQLException{
+        String query = "select * from player where team = '" + name + "' ORDER BY nbaskets DESC LIMIT 1";
+        PreparedStatement preparedStatement = conexion.prepareStatement(query);
+        ResultSet resultSet = preparedStatement.executeQuery(query);
+        List<Player> playerList = new ArrayList<>();
+        while (resultSet.next()){
+            Player player = new Player();
+            player.setNombre(resultSet.getString("name"));
+            player.setBornDate(resultSet.getDate("birth").toLocalDate());
+            player.setNumberBaskets(resultSet.getInt("nbaskets"));
+            player.setNumberAssists(resultSet.getInt("nassists"));
+            player.setNumberReboots(resultSet.getInt("nrebounds"));
+            player.setPosicion(resultSet.getString("position"));
+            player.setTeam(selectTeamByName(resultSet.getString("team")));
+            playerList.add(player);
+        }
+        resultSet.close();
+        preparedStatement.close();
+        return playerList;
+    }
+
     public void reset() throws SQLException{
         PreparedStatement resetTeam = conexion.prepareStatement("DELETE FROM team");
         PreparedStatement resetPlayer = conexion.prepareStatement("DELETE FROM player");

@@ -179,17 +179,17 @@ public class EstadisticaDTO {
 
     @Override
     public String toString() {
-        return "EstadisticaDTO{" +
-                "avgbaskets=" + avgbaskets +
-                ", avgassists=" + avgassists +
-                ", avgrebounds=" + avgrebounds +
-                ", maxbaskets=" + maxbaskets +
-                ", maxassists=" + maxassists +
-                ", maxrebounds=" + maxrebounds +
-                ", minbaskets=" + minbaskets +
-                ", minassists=" + minassists +
-                ", minrebounds=" + minrebounds +
-                ", position='" + position + '\'' +
-                '}';
+        return "EstadisticaDTO: (" +
+                "Media baskets: " + avgbaskets +
+                ", Media assistencias: " + avgassists +
+                ", Media rebotes: " + avgrebounds +
+                ", Canastas máximas: " + maxbaskets +
+                ", Asistencias máximas: " + maxassists +
+                ", Rebotes máximos: " + maxrebounds +
+                ", Canastas mínimas: " + minbaskets +
+                ", Aistencias mínimas: " + minassists +
+                ", Rebotes mínimo: " + minrebounds +
+                ", Posición: '" + position + '\'' +
+                ')';
     }
 }

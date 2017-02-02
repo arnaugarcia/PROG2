@@ -47,10 +47,9 @@ public class Team {
 
     @Override
     public String toString() {
-        return "Team{" +
-                "name='" + name + '\'' +
-                ", location='" + location + '\'' +
-                ", creationDate=" + creationDate +
-                '}';
+        return "Equipo (" +
+                "Nombre: " + name +
+                ", Localización " + location +
+                ", Fecha de creación: " + creationDate + ")";
     }
 }

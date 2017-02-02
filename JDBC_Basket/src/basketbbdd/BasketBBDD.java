@@ -52,12 +52,12 @@ public class BasketBBDD {
             Show.success(player.getNombre() + " modificado con éxito");
 
             //Ejercicio 4
-            System.out.println("Modificando Equipo " + team.getName() + " perteneciente al jugador " + player.getNombre());
+            Show.success("Modificando Equipo " + team.getName() + " perteneciente al jugador " + player.getNombre());
 
 
             //Ejercicio 6
             System.out.println("Oteniendo jugador " + player.getNombre());
-            System.out.println(conexion.selectPlayerByName("Michael Jordan").toString());
+           Show.success(conexion.selectPlayerByName("Michael Jordan").toString());
 
             //Ejercicio 7
             System.out.println("Obteniendo todos los jugadores por la letra 'M'");
@@ -107,14 +107,32 @@ public class BasketBBDD {
 
             //Ejercicio 15
             System.out.println("Listado de equipos existentes en una localidad determinada");
-            Show.success("// TODO: Acabar consulta");
+            for (Player players : conexion.getPlayersByPosition("Alero")){
+                Show.success(players.toString());
+            }
+            //Ejercicio 16
+            System.out.println("Listado de equipos existentes de un equipo por nombre ('Stucom')");
+            for (Player players : conexion.getPlayersFromTeamName("Stucom")){
+                Show.success(players.toString());
+            }
 
+            //Ejercicio 17
+            System.out.println("Listado de todos los jugadores de un equipo ('Stucom'), que además jueguen en la misma posición (parámetro adicional de la consulta), por ejemplo, alero.");
+            for (Player players : conexion.getPlayersFromTeamNameAndPosition("Stucom","Alero")){
+                Show.success(players.toString());
+            }
+
+            //Ejercicio 18
+            System.out.println("Devuelve el jugador que más canastas ha realizado de un equipo determinado como parámetro ('Stucom').");
+            for (Player players : conexion.getPlayersBasketsFromTeamName("Stucom")){
+                Show.success(players.toString());
+            }
         } catch (SQLException ex) {
             Show.error("Error con la BBDD: " + ex.getMessage());
         } finally {
             try {
                 conexion.desconectar();
-                Show.warning("Conexión cerrada.");
+                Show.error("Conexión cerrada.");
             } catch (SQLException ex) {
                 Show.error("Error al desconectar "+ex.getMessage());
             }
